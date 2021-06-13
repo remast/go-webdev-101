@@ -9,8 +9,9 @@ import (
 )
 
 type Cat struct {
-	Name  string `json:"name"`
-	Image struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       struct {
 		URL string `json:"url"`
 	}
 }
@@ -24,12 +25,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	defer resp.Body.Close()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-
 	// Create cat slice
 	cat := make([]Cat, 5)
+
+	// Read and parse
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
 	json.Unmarshal(body, &cat)
 
 	// Render template
@@ -40,7 +41,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 var assets embed.FS
 
 func main() {
-
 	mux := http.NewServeMux()
 
 	mux.Handle("/assets/", http.FileServer(http.FS(assets)))

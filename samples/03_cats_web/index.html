@@ -1,17 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>News App Demo</title>
-  <link rel="stylesheet" href="/assets/style.css">
-</head>
-<body>
-  <h1>News App Demo</h1>
-  {{ range. }}
-    <h2>{{ .Name }}</h2>
-    <img src="{{ .Image.URL }}"/>
-  {{ end }}
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/assets/style.css">
+
+    <title>Cats App Web</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Cats App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container" style="padding-top: 1.3em;">
+      <div class="row">
+        {{ range. }}
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img style="width: 30em;" src="{{ .Image.URL }}">
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <h5 class="card-title">{{ .Name }}</h5>
+                <p class="card-text">{{ .Description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </body>
 </html>
