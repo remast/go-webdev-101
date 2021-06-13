@@ -1,0 +1,7 @@
+public
+dist
+.cache
+node_modules
+debug.log
+tmp
+cp.out

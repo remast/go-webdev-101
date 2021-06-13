@@ -1,0 +1,21 @@
+{
+  "name": "turbo-powered-webapps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browser-sync -f . --port 6060 --no-notify",
+    "samples": "http-server samples --port 7070"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "copyfiles": "^2.4.1",
+    "reveal.js": "^4.1.1"
+  },
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}

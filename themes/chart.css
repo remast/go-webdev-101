@@ -1,0 +1,151 @@
+.reveal .complexity {
+    width: 100%;
+    height: 600px;
+    /*background-color: #333;*/
+  }
+  
+  .reveal .complexity:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .reveal .complexity--side {
+    height: 100%;
+    width: 50%;
+    float: left;
+    position: relative;
+  }
+  
+  .reveal .complexity--side-name {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid white;
+    height: 50px;
+    line-height: 50px;
+    box-sizing: border-box;
+    font-weight: bold;
+  }
+  
+  .reveal .complexity--stack {
+    position: absolute;
+    bottom: 50px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .reveal .complexity--slice {
+    background-color: #999;
+    width: 50%;
+    margin: 0 auto;
+    text-shadow: 0 0 1px rgba(0,0,0,0.3);
+    font-size: 26px;
+    /*padding-top: 3px;*/
+    /*box-shadow: inset 0 3px 0 rgba(255,255,255,0.3);*/
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  
+  .reveal .complexity--slice.is-color1 {
+    background-color: #c21;
+  }
+  
+  .reveal .complexity--slice.is-color2 {
+    background-color: #2a4;
+  }
+  
+  .reveal .complexity--slice.is-color3 {
+    background-color: #47d;
+  }
+  
+  .reveal .complexity--slice.is-color4 {
+    background-color: #2b9;
+  }
+  
+  .reveal .complexity--slice.is-color5 {
+    background-color: #b29;
+  }
+  
+  .reveal .complexity--slice.is-color6 {
+    background-color: #c72;
+  }
+  
+  .reveal .complexity--slice.is-color7 {
+    background-color: #99a;
+  }
+  
+  .reveal .complexity--slice.is-color8 {
+    background-color: #eb1;
+  }
+  
+  .reveal .complexity--slice.is-color9 {
+    background-color: #291;
+  }
+  
+  .reveal .complexity--slice.is-weight1 {
+    height: 25px;
+    line-height: 25px;
+    font-size: 20px;
+  }
+  
+  .reveal .complexity--slice.is-weight2 {
+    height: 40px;
+    line-height: 40px;
+  }
+  
+  .reveal .complexity--slice.is-weight3 {
+    height: 50px;
+    line-height: 50px;
+  }
+  
+  .reveal .complexity--slice.is-weight4 {
+    height: 60px;
+    line-height: 60px;
+  }
+  
+  .reveal .complexity--slice.is-weight5 {
+    height: 70px;
+    line-height: 70px;
+  }
+  
+  .reveal .complexity--slice.is-weight6 {
+    height: 80px;
+    line-height: 80px;
+  }
+  
+  .reveal .complexity--slice.is-weight7 {
+    height: 90px;
+    line-height: 90px;
+  }
+  
+  .reveal .complexity--slice.is-weight8 {
+    height: 110px;
+    line-height: 110px;
+  }
+  
+  .reveal .complexity--slice.is-weight9 {
+    height: 130px;
+    line-height: 130px;
+  }
+  
+  .reveal .complexity--title {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Orbitron, sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .reveal .subtle {
+    opacity: 0.6;
+  }
+
+  .reveal .xs {
+    font-size: 0.6em;
+  }
