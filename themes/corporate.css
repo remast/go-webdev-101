@@ -7,6 +7,10 @@
    color: #222; }
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;700;800&display=swap');
 
+.bg-white {
+  background-color: white !important;
+}
+
  /*********************************************
   * GLOBAL STYLES
   *********************************************/

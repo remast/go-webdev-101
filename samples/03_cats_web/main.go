@@ -28,12 +28,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	// Create cats slice
-	cats := make([]Cat, 5)
-	json.Unmarshal(body, &cats)
+	// Create cat slice
+	cat := make([]Cat, 5)
+	json.Unmarshal(body, &cat)
 
 	// Render template
-	tpl.Execute(w, cats)
+	tpl.Execute(w, cat)
 }
 
 //go:embed assets
@@ -46,7 +46,7 @@ func main() {
 	mux.Handle("/assets/", http.FileServer(http.FS(assets)))
 
 	mux.HandleFunc("/", indexHandler)
-	mux.HandleFunc("/health", healthHandler)
+	mux.HandleFunc("/api/cat", catAPIHandler)
 
 	http.ListenAndServe(":8080", loggingMiddleware(mux))
 }

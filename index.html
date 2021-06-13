@@ -43,7 +43,7 @@
       </section>
       </section>
       <section>
-        <section data-run-in-terminal="01_hellogopher\hellogopher.go" data-run-in-terminal-bin="go">
+        <section>
           <h2>Hello Gopher</h2>
           <pre><code data-trim data-noescape class="go">
                         package main
@@ -173,23 +173,23 @@
       </section>
       <section>
         <section>
-          <h1>The News App</h1>
+          <h1>The Cats App</h1>
         </section>
       </section>
       <section>
         <section>
-          <h1>Basic News App</h1>
+          <h1>Cats App <br/> API</h1>
         </section>
         <section>
-          <h2>Set up News Application</h2>
+          <h2>Set up Cats Application</h2>
           <pre class="fragment"><code data-trim data-noescape class="bash">
                   # Create directory
-                  mkdir news
-                  cd news
+                  mkdir cats
+                  cd cats
               </code></pre>
           <pre class="fragment"><code data-trim data-noescape class="bash">
                     # Enable dependency tracking
-                    go mod init devopscon.com/news
+                    go mod init devopscon.com/cats
               </code></pre>
           <pre class="fragment"><code data-trim data-noescape class="bash">
                 # Create go file
@@ -199,77 +199,77 @@
           </aside>
         </section>
         <section>
-          <h2>Health Check <span style="font-size: 50%;">simple</span></h2>
+          <h2>Cat API <span style="font-size: 50%;">simple</span></h2>
           <pre class="fragment"><code data-trim data-noescape data-line-numbers="6-9|1-4" class="go">
-            func healthHandler(w http.ResponseWriter, r *http.Request) {
-              fmt.Fprintf(w, "Up and running!")
+            func catAPIHandler(w http.ResponseWriter, r *http.Request) {
+              fmt.Fprintf(w, "Meow!")
               w.WriteHeader(http.StatusOK)
             }
             
             func main() {
-              http.HandleFunc("/health", healthHandler)
+              http.HandleFunc("/api/cat", catAPIHandler)
               http.ListenAndServe(":8080", nil)
             }
           </code></pre>
         </section>
         <section>
-          <h2>Health Check <span style="font-size: 50%;">with JSON</span></h2>
+          <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
           <pre class="fragment"><code data-trim data-noescape data-line-numbers="5-8|1-3|1-8" class="go">
-            type CheckResult struct {
-              Status string
+            type Cat struct {
+              Name string
             }
             
-            func healthHandler(w http.ResponseWriter, r *http.Request) {
-              c := CheckResult{Status: "Up and Running"}
+            func catAPIHandler(w http.ResponseWriter, r *http.Request) {
+              c := Cat{Name: "Ginger"}
               json.NewEncoder(w).Encode(c)
             }
                         
             func main() {
-              http.HandleFunc("/health", healthHandler)
+              http.HandleFunc("/api/cat", catAPIHandler)
               http.ListenAndServe(":8080", nil)
             }
           </code></pre>
         </section>
         <section>
-          <h2>Health Check <span style="font-size: 50%;">with JSON</span></h2>
+          <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
           <pre class="fragment"><code data-trim data-noescape data-line-numbers="1-2|3-5" class="bash">
-            # Run health check
-            curl -s http://localhost:8080/health | jq 
+            # Query cat API
+            curl -s http://localhost:8080/api/cat | jq 
             {
-              "Status": "Up and Running"
+              "Name": "Ginger"
             }
           </code></pre>
         </section>
         <section>
-          <h2>Health Check <span style="font-size: 50%;">with JSON</span></h2>
+          <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
           <pre class="fragment"><code data-trim data-noescape data-line-numbers="1-8" class="go">
-            type CheckResult struct {
-              Status string <span class="fragment">`json:"status"`</span>
+            type Cat struct {
+              Name string <span class="fragment">`json:"name"`</span>
             }
             
-            func healthHandler(w http.ResponseWriter, r *http.Request) {
-              c := CheckResult{Status: "Up and Running"}
+            func catAPIHandler(w http.ResponseWriter, r *http.Request) {
+              c := Cat{Name: "Ginger"}
               json.NewEncoder(w).Encode(c)
             }
                         
             func main() {
-              http.HandleFunc("/health", healthHandler)
+              http.HandleFunc("/api/cat", catAPIHandler)
               http.ListenAndServe(":8080", nil)
             }
           </code></pre>
         </section>
         <section>
-          <h2>Test Handler <span style="font-size: 50%;"><code>health_test.go</code></span></h2>
+          <h2>Test Handler <span style="font-size: 50%;"><code>cat_api_test.go</code></span></h2>
           <pre class="fragment" style="font-size: 0.48em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1,15|2-3|5-6|8-9|11-14|1-15" class="go">
-          func TestHealthHandler(t *testing.T) {
+          func TestCatAPIHandler(t *testing.T) {
             // 1. Create test request
-            req, _ := http.NewRequest("GET", "/health", nil)
+            req, _ := http.NewRequest("GET", "/api/cat", nil)
           
             // 2. Create recorder (which satisfies http.ResponseWriter)
             recorder := httptest.NewRecorder()
           
             // 3. Invoke handler
-            healthHandler(recorder, req)
+            catAPIHandler(recorder, req)
           
             // 4. Check the response
             if status := recorder.Code; status != http.StatusOK {
@@ -283,18 +283,18 @@
           <pre class="fragment" style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1-2|3-7" class="bash">
             # Run tests
             go test -v ./...
-            === RUN   TestHealthHandler
-            --- PASS: TestHealthHandler (0.00s)
+            === RUN   TestCatAPIHandler
+            --- PASS: TestCatAPIHandler (0.00s)
             PASS
             coverage: 50.0% of statements
-            ok      devopscon.com/news      0.127s  coverage: 50.0% of statements
+            ok      devopscon.com/cats      0.127s  coverage: 50.0% of statements
           </code></pre>
         </section>
         <section>
           <h2>Build <span style="font-size: 50%;">with <code>Makefile</code></span></h2>
           <pre class="fragment" style="font-size: 0.53em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="4-5|7-8|10-11|13-14|1-14" class="makefile">
             .DEFAULT_GOAL := build
-            BIN_FILE=news
+            BIN_FILE=cats
 
             build:
               go build -o dist/"${BIN_FILE}"
@@ -318,24 +318,34 @@
       </section>
       <section>
         <section>
-          <h1>News App</h1>
+          <h1>Cats App <br/> Web</h1>
         </section>
         <section>
-          <h2>Using a Multiplexer <span style="font-size: 50%;">(aka Router)</span></h2>
-          <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="7-8|10-11|13-14|7-14" class="go">
-            func healthHandler(w http.ResponseWriter, r *http.Request) {
-              c := CheckResult{Status: "Up and Running"}
-              json.NewEncoder(w).Encode(c)
+          <h2>Cats Handler <span style="font-size: 50%;">basic template setup</span></h2>
+          <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1-3|10|1-13" class="go">  
+            func indexHandler(w http.ResponseWriter, r *http.Request) {
+              var tpl = template.Must(template.ParseFiles("index.html"))
+              tpl.Execute(w, nil)
             }
-                        
+
             func main() {
-              // Create mux (router)
+              http.HandleFunc("/", indexHandler)
+              http.ListenAndServe(":8080", mux)
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h2>Cats Handler <span style="font-size: 50%;">with multiplexer</span></h2>
+          <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="7-8|10|1-13" class="go">  
+            func indexHandler(w http.ResponseWriter, r *http.Request) {
+              var tpl = template.Must(template.ParseFiles("index.html"))
+              tpl.Execute(w, nil)
+            }
+
+            func main() {
               mux := http.NewServeMux()
+              mux.HandleFunc("/", indexHandler)
 
-              // Register handler
-              mux.HandleFunc("/health", healthHandler)
-
-              // Run http server
               http.ListenAndServe(":8080", mux)
             }
           </code></pre>
@@ -345,13 +355,13 @@
               <li>It matches the URL of each incoming request against a list of registered patterns and calls the handler.</li>
             </ul>
           </aside>
-        </section> 
+        </section>
         <section>
           <h2>Serve files <span style="font-size: 50%;">from Filesystem</span></h2>
           <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="5-7" class="go">
             func main() {
               mux := http.NewServeMux()
-              mux.HandleFunc("/health", healthHandler)
+              mux.HandleFunc("/", indexHandler)
 
               // Serve files
               fs := http.FileServer(http.Dir("assets"))
@@ -363,13 +373,13 @@
         </section>
         <section>
           <h2>Serve files <span style="font-size: 50%;">embedded in binary</span></h2>
-          <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="8-9|8-9,1-2" class="go">
+          <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="8-9|8-9,1-2|6,9" class="go">
             //go:embed assets
             var assets embed.FS
 
             func main() {
               mux := http.NewServeMux()
-              mux.HandleFunc("/health", healthHandler)
+              mux.HandleFunc("/", indexHandler)
 
               // Serve files
               mux.Handle("/assets/", http.FileServer(http.FS(assets)))
@@ -383,24 +393,6 @@
           <img class="fragment" src="themes/godoc-handlers.png" />
         </section>
         <section>
-          <h2>Cats Handler <span style="font-size: 50%;">basic template setup</span></h2>
-          <pre class="fragment"  style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1-3|10|1-13" class="go">  
-            func indexHandler(w http.ResponseWriter, r *http.Request) {
-              var tpl = template.Must(template.ParseFiles("index.html"))
-              tpl.Execute(w, nil)
-            }
-
-            func main() {
-              mux := http.NewServeMux()
-              // ... other handlers
-
-              mux.HandleFunc("/", indexHandler)
-
-              http.ListenAndServe(":8080", mux)
-            }
-          </code></pre>
-        </section>
-        <section>
           <h2>Cats Handler <span style="font-size: 50%;">template with data</span></h2>
           <div class="grid grid-cols-12 text-left">
             <div class="col-span-8 fragment">
@@ -411,14 +403,14 @@
                 }
 
                 func indexHandler(w ResponseWriter, r *Request) {
-                  // Create cats slice
-                  cats := make([]Cat, 1)
+                  // Create cat slice
+                  cat := make([]Cat, 1)
                 
                   // Add cat ginger
-                  cats[0] = Cat{Name: "Ginger"}
+                  cat[0] = Cat{Name: "Ginger"}
                 
                   // Render template
-                  tpl.Execute(w, cats)
+                  tpl.Execute(w, cat)
                 }
               </code></pre>
             </div>
@@ -426,7 +418,7 @@
               <code>index.html</code>
               <pre style="font-size: 0.46em; overflow: hidden; margin-left: 0;"><code data-trim data-noescape class="html">  
                 &lt;body>
-                  &lt;h1>News App&lt;/h1>
+                  &lt;h1>Cats App&lt;/h1>
                   {{ range. }}
                     &lt;h2>{{ .Name }}&lt;/h2>
                   {{ end }}
@@ -434,6 +426,51 @@
               </code></pre>
             </div>
           </div>
+        </section>
+        <section data-background-iframe="https://thecatapi.com/">
+        </section>
+        <section>
+          <h2>Cats Handler <span style="font-size: 50%;">with Cats API</span></h2>
+          <div class="grid grid-cols-12 text-left">
+            <div class="col-span-8 fragment">
+              <span style="font-size: 70%">Query Cats API</span>
+              <pre style="font-size: 0.34em; overflow: hidden; margin-left: 0;"><code data-trim data-noescape class="bash">
+                GET https://api.thecatapi.com/v1/breeds?limit=5
+              </code></pre>
+              <pre style="font-size: 0.35em; overflow: hidden; margin-left: 0;"><code data-trim data-noescape class="json">
+             [
+                {
+                   "id": "abys",
+                   "name": "Abyssinian",
+                   "image": {
+                      "url": "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+                   }
+                },
+                {
+                   "id": "aege",
+                   "name": "Aegean",
+                   "image": {
+                      "url": "https://cdn2.thecatapi.com/images/ozEvzdVM-.jpg"
+                   }
+                },
+                ...
+             ]
+              </code></pre>
+            </div>
+            <div class="col-span-4 fragment">
+              <span style="font-size: 70%">Map JSON</span>
+              <pre style="font-size: 0.38em; overflow: hidden; margin-left: 0;"><code data-trim data-noescape class="go">  
+                type Cat struct {
+                  Name  string `json:"name"`
+                  Image struct {
+                    URL string `json:"url"`
+                  }
+                }            
+              </code></pre>
+            </div>
+          </div>
+        </section>
+        <section class="bg-white" data-background-iframe="https://mholt.github.io/json-to-go/">
         </section>
         <section>
           <h2>Cats Handler <span style="font-size: 50%;">with Cats API</span></h2>
@@ -445,15 +482,15 @@
                 return
               }
             
-              // Create cats slice
-              cats := make([]Cat, 5)
+              // Create cat slice
+              cat := make([]Cat, 5)
 
               // Read and parse body
               defer resp.Body.Close()            
               body, _ := ioutil.ReadAll(resp.Body)
-              json.Unmarshal(body, &cats)
+              json.Unmarshal(body, &cat)
             
-              tpl.Execute(w, cats)
+              tpl.Execute(w, cat)
             }
            </code></pre>       
         </section>

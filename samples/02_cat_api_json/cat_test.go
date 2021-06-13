@@ -6,9 +6,9 @@ import (
 	"testing"
 )
 
-func TestHealthHandler(t *testing.T) {
+func TestCatsAPIHandler(t *testing.T) {
 	// 1. Create test request
-	req, err := http.NewRequest("GET", "/health", nil)
+	req, err := http.NewRequest("GET", "/api/cat", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17,7 +17,7 @@ func TestHealthHandler(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	// 3. Invoke handler
-	healthHandler(recorder, req)
+	catAPIHandler(recorder, req)
 
 	// 4. Check the status code
 	if status := recorder.Code; status != http.StatusOK {

@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := build
-BIN_FILE=news
+BIN_FILE=cats
 build:
 	go build -o dist/"${BIN_FILE}"
 test:

@@ -1,0 +1,21 @@
+[
+    {
+       "id":"abys",
+       "name":"Abyssinian",
+       "image":{
+          "width":1204,
+          "height":1445,
+          "url":"https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+       }
+    },
+    {
+       "id":"aege",
+       "name":"Aegean",
+       "image":{
+          "width":1200,
+          "height":800,
+          "url":"https://cdn2.thecatapi.com/images/ozEvzdVM-.jpg"
+       }
+    },
+    ...
+ ]
