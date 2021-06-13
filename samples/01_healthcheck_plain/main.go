@@ -7,6 +7,7 @@ import (
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Up and running!")
+	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
