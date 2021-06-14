@@ -9,11 +9,12 @@ import (
 )
 
 type Cat struct {
+	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Image       struct {
 		URL string `json:"url"`
-	}
+	} `json:"image"`
 }
 
 var tpl = template.Must(template.ParseFiles("index.html"))

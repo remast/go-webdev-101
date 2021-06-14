@@ -20,7 +20,7 @@ func TestCatsAPIHandler(t *testing.T) {
 	catAPIHandler(recorder, req)
 
 	// 4. Check the status code
-	if status := recorder.Code; status != http.StatusOK {
-		t.Errorf("Wrong status code: got %v expected %v", status, http.StatusOK)
+	if recorder.Code != http.StatusOK {
+		t.Errorf("Wrong status code: got %v expected %v", recorder.Code, http.StatusOK)
 	}
 }

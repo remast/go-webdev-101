@@ -184,7 +184,7 @@
           <h1>Cats App <br/> API</h1>
         </section>
         <section>
-          <h2>Set up Cats Application</h2>
+          <h2>Set up Cats App</h2>
           <pre class="fragment"><code data-trim data-noescape class="bash">
                   # Create directory
                   mkdir cats
@@ -217,7 +217,7 @@
         </section>
         <section>
           <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
-          <pre class="fragment"><code data-trim data-noescape data-line-numbers="5-8|1-3|1-8" class="go">
+          <pre class="fragment"><code data-trim data-noescape data-line-numbers="5-8|1-3|1-8|1-13" class="go">
             type Cat struct {
               Name string
             }
@@ -268,7 +268,7 @@
         </section>
         <section>
           <h2>Test Handler <span style="font-size: 50%;"><code>cat_api_test.go</code></span></h2>
-          <pre class="fragment" style="font-size: 0.48em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1,15|2-3|5-6|8-9|11-14|1-15" class="go">
+          <pre class="fragment" style="font-size: 0.45em; overflow: hidden; margin-left: 0; margin-right: 0;"><code data-trim data-noescape data-line-numbers="1,15|2-3|5-6|8-9|11-14|1-15" class="go">
           func TestCatAPIHandler(t *testing.T) {
             // 1. Create test request
             req, _ := http.NewRequest("GET", "/api/cat", nil)
@@ -278,10 +278,10 @@
           
             // 3. Invoke handler
             catAPIHandler(recorder, req)
-          
+
             // 4. Check the response
-            if status := recorder.Code; status != http.StatusOK {
-              t.Errorf("Wrong status: got %v expected %v", status, http.StatusOK)
+            if recorder.Code != http.StatusOK {
+              t.Errorf("Wrong status: got %v expected %v", recorder.Code, http.StatusOK)
             }
           }
           </code></pre>
@@ -338,7 +338,7 @@
 
             func main() {
               http.HandleFunc("/", indexHandler)
-              http.ListenAndServe(":8080", mux)
+              http.ListenAndServe(":8080", nil)
             }
           </code></pre>
         </section>
@@ -469,10 +469,11 @@
               <span style="font-size: 70%">Map JSON</span>
               <pre style="font-size: 0.38em; overflow: hidden; margin-left: 0;"><code data-trim data-noescape class="go">  
                 type Cat struct {
+                  ID    string `json:"id"`
                   Name  string `json:"name"`
                   Image struct {
                     URL string `json:"url"`
-                  }
+                  } `json:"image"`
                 }            
               </code></pre>
             </div>
@@ -482,7 +483,7 @@
         </section>
         <section>
           <h2>Cats Handler <span style="font-size: 50%;">with Cats API</span></h2>
-          <pre style="font-size: 0.44em;" class="fragment"><code data-trim data-noescape data-line-numbers="2-6|8-14|1-17" class="go">  
+          <pre style="font-size: 0.44em;" class="fragment"><code data-trim data-noescape data-line-numbers="2-6|8-10|11-14|1-17" class="go">  
             func indexHandler(w http.ResponseWriter, r *http.Request) {
               resp, err := http.Get("https://api.thecatapi.com/v1/breeds?limit=5")
               if err != nil {
@@ -503,6 +504,14 @@
            </code></pre>       
         </section>
         <section>
+          <h2>Middleware <span style="font-size: 50%;"></span></h2>
+          <ul style="font-size: 80%;">
+            <li class="fragment">cross cutting functionality for all requests <br/> (e.g. logging, authentication)</li>
+            <li class="fragment">create a chain of handlers <br/> router => middleware handler => application handler</li>
+            <li class="fragment">satisfy the interface <code>http.Handler</code></li>
+          </ul>
+        </section>
+        <section>
           <h2>Middleware <span style="font-size: 50%;">to log requests</span></h2>
           <pre style="font-size: 0.48em;" class="fragment"><code data-trim data-noescape data-line-numbers="12|1-6|1-12" class="go">  
             func loggingMiddleware(next http.Handler) http.Handler {
@@ -519,6 +528,11 @@
               http.ListenAndServe(":8080", loggingMiddleware(mux))
             }
            </code></pre>
+           <aside class="notes">
+             <ul>
+               <li>https://golang.org/pkg/net/http/#HandlerFunc</li>
+             </ul>
+           </aside>
         </section>
         <section>
           <h3>Demo</h3>
