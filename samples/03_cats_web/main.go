@@ -3,9 +3,14 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 	"text/template"
+
+	"github.com/joho/godotenv"
 )
 
 type Cat struct {
@@ -20,7 +25,7 @@ type Cat struct {
 var tpl = template.Must(template.ParseFiles("index.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	resp, err := http.Get("https://api.thecatapi.com/v1/breeds?api_key=c737a14e-40c2-4dca-995d-a87849c4547d&limit=5")
+	resp, err := http.Get(fmt.Sprintf("https://api.thecatapi.com/v1/breeds?api_key=%v&limit=5", os.Getenv("CATS_API_KEY")))
 	if err != nil {
 		http.Error(w, "Cats API error", http.StatusInternalServerError)
 		return
@@ -42,6 +47,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 var assets embed.FS
 
 func main() {
+	// Load env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Error loading .env file")
+		os.Exit(1)
+	}
+
 	mux := http.NewServeMux()
 
 	mux.Handle("/assets/", http.FileServer(http.FS(assets)))
