@@ -8,7 +8,7 @@ import (
 
 func TestCatsAPIHandler(t *testing.T) {
 	// 1. Create test request
-	req, err := http.NewRequest("GET", "/api/cat", nil)
+	req, err := http.NewRequest("GET", "/api/cats", nil)
 	if err != nil {
 		t.Fatal(err)
 	}

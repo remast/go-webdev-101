@@ -212,7 +212,7 @@
             }
             
             func main() {
-              http.HandleFunc("/api/cat", catAPIHandler)
+              http.HandleFunc("/api/cats", catAPIHandler)
               http.ListenAndServe(":8080", nil)
             }
           </code></pre>
@@ -225,12 +225,13 @@
             }
             
             func catAPIHandler(w http.ResponseWriter, r *http.Request) {
-              c := Cat{Name: "Ginger"}
+              cats := make([]Cat, 1)
+              cats[0] = Cat{Name: "Ginger"}
               json.NewEncoder(w).Encode(c)
             }
                         
             func main() {
-              http.HandleFunc("/api/cat", catAPIHandler)
+              http.HandleFunc("/api/cats", catAPIHandler)
               http.ListenAndServe(":8080", nil)
             }
           </code></pre>
@@ -244,10 +245,12 @@
           <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
           <pre class="fragment"><code data-trim data-noescape data-line-numbers="1-2|3-5" class="bash">
             # Query cat API
-            curl -s http://localhost:8080/api/cat | jq 
-            {
-              "Name": "Ginger"
-            }
+            curl -s http://localhost:8080/api/cats | jq 
+            [
+              {
+                "Name": "Ginger"
+              }
+            ]
           </code></pre>
         </section>
         <section>
@@ -258,12 +261,13 @@
             }
             
             func catAPIHandler(w http.ResponseWriter, r *http.Request) {
-              c := Cat{Name: "Ginger"}
-              json.NewEncoder(w).Encode(c)
+              cats := make([]Cat, 1)
+              cats[0] = Cat{Name: "Ginger"}
+              json.NewEncoder(w).Encode(cats)
             }
                         
             func main() {
-              http.HandleFunc("/api/cat", catAPIHandler)
+              http.HandleFunc("/api/cats", catAPIHandler)
               http.ListenAndServe(":8080", nil)
             }
           </code></pre>
@@ -273,7 +277,7 @@
           <pre class="fragment" style="font-size: 0.45em; overflow: hidden; margin-left: 0; margin-right: 0;"><code data-trim data-noescape data-line-numbers="1,15|2-3|5-6|8-9|11-14|1-15" class="go">
           func TestCatAPIHandler(t *testing.T) {
             // 1. Create test request
-            req, _ := http.NewRequest("GET", "/api/cat", nil)
+            req, _ := http.NewRequest("GET", "/api/cats", nil)
           
             // 2. Create recorder (which satisfies http.ResponseWriter)
             recorder := httptest.NewRecorder()
