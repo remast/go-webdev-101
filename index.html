@@ -28,7 +28,10 @@
       </section>
       <section>
         <section>
-          HOOK
+          <h2 class="fragment" style="text-align: left;">3 months <span style="font-size: 70%; font-weight: normal; text-transform: none;">to be productive</span></h2>
+          <h2 class="fragment" style="text-align: left;">74% <span style="font-size: 70%; font-weight: normal; text-transform: none;">write</span> API services</h2>
+          <h2 class="fragment" style="text-align: left;">45% <span style="font-size: 70%; font-weight: normal; text-transform: none;">write</span> Web apps</h2>
+          <span class="fragment" style="font-size: 0.3em; position: relative; left: 100px;"><sup>*</sup><a href="https://blog.golang.org/survey2020-results">Go Developer Survey 2020 Results</a></span>
         </section>
         <section>
           <div class="grid grid-cols-3 gap-1 items-center">
@@ -109,18 +112,18 @@
           </div>
         </section>
         <section>
-          <h2>Variablen, Slices, Loops</h2>
+          <h2>Variables, Slices, Loops</h2>
           <pre style="font-size: 0.48em;"><code data-trim data-noescape class="go" data-line-numbers="1-3|5-6|8-11|12-15">
                 // Variable
-                var frank string = "Frank"
-                claire := "Claire"
+                var kitty string = "Kitty"
+                bella := "Bella"
 
                 // Array (fixed length)
-                namesArray := [3]string{frank, claire, "Zoe"}
+                namesArray := [3]string{kitty, bella, "Cleo"}
 
                 // Slice (variable length)
                 namesSlice := make([]string, 2)
-                namesSlice[0] = frank
+                namesSlice[0] = kitty
 
                 // Loop
                 for i, name := range namesSlice {
@@ -131,12 +134,12 @@
         <section data-run-in-terminal="02_struct\congressman.go" data-run-in-terminal-bin="go">
           <h2>Struct <span style="font-size: 50%;"></span></h2>
           <pre><code data-trim data-noescape data-line-numbers="1-3|6,7|1-8" class="go">
-              type Congressman struct {
+              type Cat struct {
                 Name string
               }
               
               func main() {
-                c := Congressman{Name: "Peter Russo"}
+                c := Cat{Name: "Kitty"}
                 fmt.Println("Hello " + c.Name + "!")
               }
            </code></pre>
@@ -145,21 +148,20 @@
           <h2>Errors</h2>
           <pre style="font-size: 0.41em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1-8|12-17" class="go">
                       // Error as return value
-                      func (c Congressman) bribe(amount float64) error {
-                        if c.Name != "Peter Russo" {
-                            return errors.New("Not corrupt!")
+                      func (c Cat) feed(food string) error {
+                        if c.Name == "Kitty" && food != "Steak Tartare" {
+                            return errors.New("Won't eat!")
                         }
-                        c.AccountBalance += amount
                         return nil
                       }
 
                       func main() {
-                        c := Congressman{Name: "Jackie Sharp", AccountBalance: -10.0}
+                        c := Cat{Name: "Kitty"}
 
                         // Handle error
-                        err := c.bribe(5000.0)
+                        err := c.feed("Caviar")
                         if err != nil {
-                            fmt.Printf("%v is not bribable.", c.Name)
+                            fmt.Printf("%v won't eat it.", c.Name)
                         }
                       }
                   </code></pre>
@@ -267,7 +269,7 @@
           </code></pre>
         </section>
         <section>
-          <h2>Test Handler <span style="font-size: 50%;"><code>cat_api_test.go</code></span></h2>
+          <h2>Test Cat API <span style="font-size: 50%;"><code>cat_api_test.go</code></span></h2>
           <pre class="fragment" style="font-size: 0.45em; overflow: hidden; margin-left: 0; margin-right: 0;"><code data-trim data-noescape data-line-numbers="1,15|2-3|5-6|8-9|11-14|1-15" class="go">
           func TestCatAPIHandler(t *testing.T) {
             // 1. Create test request
@@ -287,7 +289,7 @@
           </code></pre>
         </section>
         <section>
-          <h2>Run Tests<span style="font-size: 50%;"></span></h2>
+          <h2>Run Test</h2>
           <pre class="fragment" style="font-size: 0.5em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1-2|3-7" class="bash">
             # Run tests
             go test -v ./...
@@ -319,9 +321,6 @@
         </section>
         <section>
           <h2>Demo</h2>
-        </section>
-        <section>
-          <h2>Wrap Up?!?</h2>
         </section>
       </section>
       <section>
@@ -545,7 +544,7 @@
               <h4>Basics <br /> &nbsp;</h4>
               <ul>
                 <li>Dev Setup</li>
-                <li>Variablen, Slices, Loops</li>
+                <li>Variables, Slices, Loops</li>
                 <li>Struct</li>
                 <li>Errors</li>
               </ul>
