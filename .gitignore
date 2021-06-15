@@ -5,3 +5,4 @@ node_modules
 debug.log
 tmp
 cp.out
+*.exe
