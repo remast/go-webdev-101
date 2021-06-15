@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "browser-sync -f . --port 6060 --no-notify",
-    "samples": "http-server samples --port 7070"
+    "samples": "http-server samples --port 7070",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,9 @@
     "reveal.js": "^4.1.1"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "reveal-plantuml": "^1.0.2",
+    "reveal-run-in-terminal": "^1.0.4",
     "http-server": "^0.12.3"
   }
 }

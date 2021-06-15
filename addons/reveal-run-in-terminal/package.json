@@ -1,0 +1,66 @@
+{
+  "_from": "reveal-run-in-terminal",
+  "_id": "reveal-run-in-terminal@1.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-6KiNpALt1UyfCpovxXE3nz/I5qZKfssz/mz4GwNrkIg9MyXCpsrmcQZRn5fH4DmfVhDwo9/qIG7NZuO0byBjtw==",
+  "_location": "/reveal-run-in-terminal",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "reveal-run-in-terminal",
+    "name": "reveal-run-in-terminal",
+    "escapedName": "reveal-run-in-terminal",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/reveal-run-in-terminal/-/reveal-run-in-terminal-1.0.4.tgz",
+  "_shasum": "ed822b091c93757e27ed6a106c6aebbb378b7779",
+  "_spec": "reveal-run-in-terminal",
+  "_where": "C:\\projects\\talks.reveal",
+  "author": {
+    "name": "Daniel Luxemburg",
+    "email": "daniel.luxemburg@gmail.com",
+    "url": "http://dluxemburg.com"
+  },
+  "bugs": {
+    "url": "https://github.com/stanleynguyen/reveal-run-in-terminal/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Stanley Nguyen",
+      "email": "hung.ngn.the@gmail.com",
+      "url": "https://stanleynguyen/me"
+    }
+  ],
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "deprecated": false,
+  "description": "Show and execute code in your presentation",
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "np": "^6.5.0",
+    "reveal.js": "^3.3.0"
+  },
+  "homepage": "https://github.com/stanleynguyen/reveal-run-in-terminal#readme",
+  "license": "ISC",
+  "main": "index.js",
+  "name": "reveal-run-in-terminal",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stanleynguyen/reveal-run-in-terminal.git"
+  },
+  "scripts": {
+    "build": "browserify --debug src/reveal-run-in-terminal.js > static/plugin/reveal-run-in-terminal.js",
+    "release": "np",
+    "start": "node demo/app.js"
+  },
+  "version": "1.0.4"
+}
