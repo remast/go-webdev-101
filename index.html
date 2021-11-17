@@ -194,7 +194,7 @@
               </code></pre>
           <pre class="fragment"><code data-trim data-noescape class="bash">
                     # Enable dependency tracking
-                    go mod init devopscon.com/cats
+                    go mod init goday.com/cats
               </code></pre>
           <pre class="fragment"><code data-trim data-noescape class="bash">
                 # Create go file
@@ -219,7 +219,7 @@
         </section>
         <section>
           <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
-          <pre class="fragment"><code data-trim data-noescape data-line-numbers="5-8|1-3|1-8|1-13" class="go">
+          <pre class="fragment" style="font-size: 0.51em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="5-8|1-3|1-8|1-13" class="go">
             type Cat struct {
               Name string
             }
@@ -243,7 +243,7 @@
         </section>
         <section>
           <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
-          <pre class="fragment"><code data-trim data-noescape data-line-numbers="1-2|3-5" class="bash">
+          <pre class="fragment"><code data-trim data-noescape data-line-numbers="1-2|3-7" class="bash">
             # Query cat API
             curl -s http://localhost:8080/api/cats | jq 
             [
@@ -255,7 +255,7 @@
         </section>
         <section>
           <h2>Cat API <span style="font-size: 50%;">with JSON</span></h2>
-          <pre class="fragment"><code data-trim data-noescape data-line-numbers="1-8" class="go">
+          <pre class="fragment" style="font-size: 0.49em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="1-8" class="go">
             type Cat struct {
               Name string <span class="fragment">`json:"name"`</span>
             }
@@ -306,7 +306,7 @@
         </section>
         <section>
           <h2>Build <span style="font-size: 50%;">with <code>Makefile</code></span></h2>
-          <pre class="fragment" style="font-size: 0.53em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="4-5|7-8|10-11|13-14|1-14" class="makefile">
+          <pre class="fragment" style="font-size: 0.51em; overflow: hidden;"><code data-trim data-noescape data-line-numbers="4-5|7-8|10-11|13-14|1-14" class="makefile">
             .DEFAULT_GOAL := build
             BIN_FILE=cats
 
@@ -486,7 +486,7 @@
         </section>
         <section>
           <h2>Cats Handler <span style="font-size: 50%;">with Cats API</span></h2>
-          <pre style="font-size: 0.44em;" class="fragment"><code data-trim data-noescape data-line-numbers="2-6|8-10|11-14|1-17" class="go">  
+          <pre style="font-size: 0.43em;" class="fragment"><code data-trim data-noescape data-line-numbers="2-6|8-10|11-14|1-17" class="go">  
             func indexHandler(w http.ResponseWriter, r *http.Request) {
               resp, err := http.Get("https://api.thecatapi.com/v1/breeds?limit=5")
               if err != nil {
@@ -647,6 +647,7 @@
     Reveal.initialize({
       transition: 'slide',
       pdfSeparateFragments: false,
+      navigationMode: 'linear',
       dependencies: [
         { src: './assets/node_modules/reveal-plantuml/dist/reveal-plantuml.min.js' },
         {

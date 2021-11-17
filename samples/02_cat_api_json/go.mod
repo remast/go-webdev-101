@@ -1,3 +1,3 @@
-module devopscon.com/cats
+module goday.com/cats
 
 go 1.16

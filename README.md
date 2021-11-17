@@ -12,4 +12,4 @@ Slides are available at http://localhost:6060.
 
 ### Hot reloading
 
-Enable hot reloading of samples using [Fresh](https://github.com/gravityblast/fresh).
+Enable hot reloading of samples using [browser-sync](https://browsersync.io/).
