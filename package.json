@@ -20,6 +20,6 @@
     "express": "^4.17.1",
     "reveal-plantuml": "^1.0.2",
     "reveal-run-in-terminal": "^1.0.4",
-    "http-server": "^0.12.3"
+    "http-server": "^0.13.0"
   }
 }
