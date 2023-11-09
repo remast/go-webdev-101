@@ -14,7 +14,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.14",
     "copyfiles": "^2.4.1",
-    "reveal.js": "^4.1.1"
+    "reveal.js": "^5.0.0"
   },
   "dependencies": {
     "express": "^4.17.1",
