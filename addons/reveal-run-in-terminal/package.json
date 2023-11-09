@@ -45,7 +45,7 @@
   "deprecated": false,
   "description": "Show and execute code in your presentation",
   "devDependencies": {
-    "browserify": "^13.1.0",
+    "browserify": "^17.0.0",
     "np": "^6.5.0",
     "reveal.js": "^3.3.0"
   },
