@@ -46,7 +46,7 @@
   "description": "Show and execute code in your presentation",
   "devDependencies": {
     "browserify": "^17.0.0",
-    "np": "^8.0.0",
+    "np": "^9.0.0",
     "reveal.js": "^5.0.0"
   },
   "homepage": "https://github.com/stanleynguyen/reveal-run-in-terminal#readme",
