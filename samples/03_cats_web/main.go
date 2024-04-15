@@ -4,7 +4,7 @@ import (
 	"embed"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -36,7 +36,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Read and parse
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	json.Unmarshal(body, &cat)
 
 	// Render template

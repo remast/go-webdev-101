@@ -47,10 +47,10 @@ section.has-light-background h6 {
 .reveal-viewport {
   background: rgb(0, 18, 49, 1);
   background-color: rgb(0, 18, 49, 1);
-  background-image: url(./logo.svg);
+/*  background-image: url(./logo.svg); 
   background-repeat: no-repeat;
   background-position: calc(100% - 15px) calc(0% + 15px);
-  background-size: 72px;
+  background-size: 72px;*/
 }
 
 .reveal {
