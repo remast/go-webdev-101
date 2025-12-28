@@ -40,7 +40,7 @@
     }
   ],
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^5.0.0"
   },
   "deprecated": false,
   "description": "Show and execute code in your presentation",
